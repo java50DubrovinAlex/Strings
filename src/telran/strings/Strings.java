@@ -18,18 +18,18 @@ static public String ipV4Address() {
 }
 private static String operand() {
 	
-	return "\\s?(((\\d+)(\\.)?(\\d*)|\\.\\d+|([a-zA-Z$][\\w$]*[^\s]|_[\\w$]+))?)\\s?";
+	return "\\d+\\.?\\d*|\\.\\d+|[a-zA-Z$][\\w$]*[^\\s]|_[\\w$]+";
 	
 }
 private static String operator() {
-	return "(?<!\\s{2})[-+/*]?(?!\\s)";
+	return "[-+/*]";
 	
 }
 
 static public String arithmeticExpression() {
 	String operator = operator();
 	String operand = operand();
-	return String.format("(%1$s%2$s?%3$s?)+",operand, operator, operand);
+	return String.format("(\\s?(%1$s)\\s?(%2$s)?\\s?(%1$s)?\\s?)+",operand, operator);
 }
 
 }
